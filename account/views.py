@@ -2,12 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib import messages
-from feedback.models import Contato
+from feedback.models import Disciplina
 
 def login(request):
     if request.user.is_authenticated: 
-        contatos = Contato.objects.all()  
-        return redirect('listagem_contatos') 
+        disciplinas = Disciplina.objects.all()  
+        return redirect('listagem_disciplina') 
 
     if request.method == "POST":
         usuario = request.POST['usuario']
@@ -16,7 +16,7 @@ def login(request):
 
         if verificar_usuario is not None:
             auth.login(request, verificar_usuario)
-            return redirect('listagem_contatos')
+            return redirect('listagem_disciplina')
         else:
             return render(request, 'login.html', {'error_message': "Usuário ou senha inválidos"})
     else:
@@ -28,8 +28,8 @@ def logout(request):
 
 def register(request):
     if request.user.is_authenticated:
-        contatos = Contato.objects.all()  
-        return redirect('listagem_contatos') 
+        disciplinas = Disciplina.objects.all()  
+        return redirect('listagem_disciplina') 
 
     if request.method == "POST":
         usuario = request.POST.get('username') 
