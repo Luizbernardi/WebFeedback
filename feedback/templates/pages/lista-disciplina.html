@@ -1,7 +1,30 @@
 {% extends 'pages/includes/base.html' %} {% block title %} Home {% endblock %}
 {% block content %} {% include 'pages/includes/navbar.html' %}
-<div class="container mt-5">
-  <h1 class="text-center">Olá, Bootstrap!</h1>
-  <button class="btn btn-primary">Botão Primário</button>
+<div class="container mt-5" style="background-color: #65e4fa">
+  <div class="d-flex justify-content-between">
+    <h2 class="text-center justify-content-center">Lista de Disciplinas</h2>
+  </div>
+  <div class="d-flex justify-content-center">
+    <table class="table table-striped w-50">
+      <thead>
+        <tr>
+          <th class="text-center">Nome da Disciplina</th>
+          <th class="text-center">Professor</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for disciplina in disciplinas %}
+        <tr>
+          <td class="text-center">
+            <a href="{% url 'detalhe' disciplina.id %}"
+              >{{ disciplina.nome }}</a
+            >
+          </td>
+          <td class="text-center">{{ disciplina.professor }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 {% endblock %}
