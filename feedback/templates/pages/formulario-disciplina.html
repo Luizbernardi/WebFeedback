@@ -1,10 +1,25 @@
 {% extends 'pages/includes/base.html' %}
 {% block title %}
-Home
+    Cadastro Feedback
 {% endblock %}
 {% block content %}
     <div class="container mt-5">
-        <h1 class="text-center">Olá, Bootstrap!</h1>
-        <button class="btn btn-primary">Botão Primário</button>
+        <h1>Avaliar Disciplina</h1>
+        {% if erro_mensagem %}
+            <div class="alert alert-danger">{{ erro_mensagem }}</div>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="nota">Nota (1 a 5):</label>
+                <input type="number" class="form-control" id="nota" name="nota" min="1" max="5" required>
+            </div>
+            <div class="form-group">
+                <label for="comentario">Comentário:</label>
+                <textarea class="form-control" id="comentario" name="comentario" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar Avaliação</button>
+            <a href="{% url 'detalhe_disciplina' disciplina_pk %}" class="btn btn-secondary">Cancelar</a>
+        </form>
     </div>
 {% endblock %}
